@@ -74,7 +74,7 @@ void initTimer()
     CMU_ClockEnable(cmuClock_TIMER0, true);
 
     TIMER_Init_TypeDef timerInit = TIMER_INIT_DEFAULT;
-    timerInit.prescale = timerPrescale1024; // Add this line
+    timerInit.prescale = timerPrescale1024;   // Added this To slow down the timer count rate
 
     TIMER_Init(TIMER0, &timerInit);
     TIMER_CounterSet(TIMER0, 0);
