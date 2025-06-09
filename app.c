@@ -142,9 +142,17 @@ void app_process_action(void)
         delay_us(1000000); // 1 second delay
     }
     // LED Logic ---
-    if (distance1 < 100 || distance2 < 100)
+    if ((distance1 > 0 && distance1 < 50) || (distance2 > 0 && distance2 < 50))
+        {
+            // If any sensor detects < 50 cm, continuous LED
+            GPIO_PinOutSet(LED_PORT, LED_PIN);
+        }
+    else if ((distance1 >= 50 && distance1 < 100) || (distance2 >= 50 && distance2 < 100))
     {
+        // If any detects between 50–100 cm, Blinking LED
         GPIO_PinOutSet(LED_PORT, LED_PIN);
+        delay_us(10000);
+        GPIO_PinOutClear(LED_PORT, LED_PIN);
     }
     else
     {
@@ -157,7 +165,7 @@ void app_process_action(void)
         // If any sensor detects < 50 cm, continuous buzzer
         GPIO_PinOutSet(BUZZ_PORT, BUZZ_PIN);
     }
-    else if ((distance1 >= 20 && distance1 < 100) || (distance2 >= 20 && distance2 < 100))
+    else if ((distance1 >= 50 && distance1 < 100) || (distance2 >= 50 && distance2 < 100))
     {
         // If any detects between 20–100 cm, short beep
         GPIO_PinOutSet(BUZZ_PORT, BUZZ_PIN);
