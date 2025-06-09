@@ -1,0 +1,6542 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>CLI Command Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;1,300;1,500&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,500;1,300;1,500&display=swap" rel="stylesheet">
+<style>
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, code, em, strong,
+ol, ul, li, article, aside, footer, header, menu, nav, section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+body {
+  line-height: 1;
+  background: #f8f8f8;
+  font-family: Roboto, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  padding-bottom: 36px;
+}
+ol, ul {
+  list-style: none;
+}
+strong {
+  font-weight: 500;
+}
+em {
+  font-style: italic;
+}
+
+.command {
+  background: #ffffff;
+  margin: 18px;
+  position: relative;
+  padding: 21px 24px 24px 24px;
+  min-width: 300px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.27);
+  border-radius: 2px;
+}
+.command-header-bar {
+  position: absolute;
+  height: 32px;
+  width: 4px;
+  top: 24px;
+  left: 0;
+  background-color: #0086d9;
+}
+
+h1 {
+  font-size: 42px;
+  margin: 18px;
+  line-height: 54px;
+}
+h2 {
+  font-size: 36px;
+  margin: 18px;
+  padding-top: 18px;
+  line-height: 42px;
+}
+h3 {
+  font-size: 30px;
+  margin: 18px;
+  line-height: 36px;
+}
+h4 {
+  font-size: 24px;
+  margin: 18px;
+  line-height: 30px;
+}
+
+.command-header {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 18px;
+  color: #333333;
+  line-height: 38px;
+  padding-bottom: 8px;
+}
+.group-header {
+  font-family: 'Roboto Mono', monospace;
+  color: #444447;
+}
+
+.command-name {
+  font-weight: 500;
+}
+.command-argument {
+  padding-left: 12px;
+}
+.command-handler {
+  display:inline-block;
+  float: right;
+  font-size: 12px;
+  line-height: 38px;
+}
+.group-info > .help, .group-info > .alias-list {
+  margin: 0 18px;
+}
+
+.arguments-title {
+  font-weight: 500;
+  margin-top: 8px;
+  line-height: 20px;
+}
+.argument-list li {
+  margin-left: 12px;
+  line-height: 20px;
+}
+.argument-list .argument-name {
+  font-family: 'Roboto Mono', monospace;
+  display: inline-block;
+  width: 50px;
+}
+
+.aliases-title {
+  font-weight: 500;
+  margin-top: 8px;
+  line-height: 20px;
+  display: inline-block;
+}
+.alias-list .alias {
+  margin-left: 12px;
+  line-height: 20px;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.search {
+  padding: 0 18px;
+  float: right;
+  font-size: 18px;
+}
+
+#search {
+  padding: 12px;
+  border: 1px solid #acacac;
+  border-radius: 2px;
+  width: 300px;
+  font-size: 16px;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 300;
+}
+
+</style>
+</head>
+
+<!--
+Example syntax (.slcc or .slcp) for populating this file:
+
+  template_contribution:
+    - name: cli_command          # Register a command
+      value:
+        name: status             # Name of command
+        handler: status_command  # Function to be called. Must be defined
+        help: "Prints status"    # Optional help description
+        shortcuts:               # Optional shorcut list
+          - name: st
+        argument:                # Argument list, if apliccable
+          - type: uint8          # Variable type
+            help: "Channel"      # Optional description
+          - type: string
+            help: "Text"
+    - name: cli_group            # Register a group
+      value:
+        name: shell              # Group name
+        help: "Shell commands"   # Optional help description
+        shortcuts:               # Optional shorcuts
+          - name: sh
+    - name: cli_command
+      value:
+        name: repeat
+        handler: repeat_cmd
+        help: "Repeat commands"
+        shortcuts:
+          - name: r
+          - name: rep
+        group: shell            # Associate command with group
+        argument:
+          - type: string
+            help: "Text"
+          - type: additional
+            help: "More text"
+-->
+
+<body>
+<div class="search">
+<input type="text" tabindex="0" id="search" placeholder="Search for command..." />
+</div>
+<h1>CLI Command Reference</h1>
+
+
+
+<div class="command-list">
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">_________________________________</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____Application_Configuration____</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setEventConfig</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">setEventConfig</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control RAIL events.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>eventsMask<31:0>
+        </li>
+        <li>
+        <span class="argument-name">u32</span>eventsValues<31:0>
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> eventsMask<63:32>\n                    [uint32opt] eventsValues<63:32>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">resetCounters</span>
+      <span class="command-handler">resetCounters</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Resets the TX and RX counters.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setPeripheralEnable</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setPeripheralEnable</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control LEDs and LCD peripherals.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>[0=Disable] 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setNotifications</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setNotifications</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control asynchronous status prints (rxPacket,txEnd,txError).</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable [1=Enable]
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getLogLevels</span>
+      <span class="command-handler">getLogLevels</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Show whether notifications or peripherals are enabled.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getVersion</span>
+      <span class="command-handler">getVersion</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get version information.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getVersionVerbose</span>
+      <span class="command-handler">getVersionVerbose</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get verbose version information.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setPtiProtocol</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setPtiProtocol</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set PTI protocol for Network Analyzer.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Custom 2=Thread 3=BLE 4=Connect 5=Zigbee 6=Z-Wave
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getPti</span>
+      <span class="command-handler">getPti</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get PTI configuration.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setPrintingEnable</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setPrintingEnable</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control all printing in RAILtest, except CLI.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable [1=Enable]
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____________________________</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____Receive_and_Transmit____</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">rx</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">rx</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control receive mode.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">r</span>
+      </div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable [1=Enable]
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">rxAt</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">str</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">str</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">rxAt</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure scheduled receive.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>startTimeUs
+        </li>
+        <li>
+        <span class="argument-name">str</span>'rel'=Relative 'abs'=Absolute
+        </li>
+        <li>
+        <span class="argument-name">u32</span>endTimeUs
+        </li>
+        <li>
+        <span class="argument-name">str</span>'rel'=Relative 'abs'=Absolute
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> rxTransEndSched: [0]/1\n                    [uint8opt] hardEnd: [0]/1
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setRxOptions</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">setRxOptions</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Show/Configure receive options (RAIL_RX_OPTIONs).</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">configRxOptions</span>
+      </div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> rxOptionsValues: bitmask of enabled options
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">tx</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">tx</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Transmit packets with current TX options.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">t</span>
+      </div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>number of packets, 0=continuous until next 'tx 0'
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">txWithOptions</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">txWithOptions</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Same tx command. This command is deprecated.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>number of packets, 0=continuous until next 'tx 0'
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">txAfterRx</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">txAfterRx</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Schedule a TX with specified delay after each RX.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>delayUs: 0=Disable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">configTxOptions</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">configTxOptions</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Show/Configure transmit options (RAIL_TX_OPTIONs).</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">setTxOptions</span>
+      </div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> txOptionsValues: bitmask of enabled options
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setFixedLength</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">setFixedLength</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure fixed length packet operation.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>fixedLength: payload bytes
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setPower</span>
+        <span class="command-argument">i32</span>
+        <span class="command-argument">[str]</span>
+      <span class="command-handler">setPower</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the transmit power. The radio must be IDLE.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">i32</span>power: deci-dBm unless 'raw' is added
+        </li>
+        <li>
+        <span class="argument-name">str</span><em>(optional)</em> 'raw'=units are raw power level
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getPower</span>
+      <span class="command-handler">getPower</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the transmit power in deci-dBm.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setPowerConfig</span>
+        <span class="command-argument">str</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">setPowerConfig</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set transmit PA configuration. Must use setpower afterwards.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">str</span>paMode
+        </li>
+        <li>
+        <span class="argument-name">u16</span>millivolts
+        </li>
+        <li>
+        <span class="argument-name">u16</span>rampTimeUs
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getPowerConfig</span>
+      <span class="command-handler">getPowerConfig</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the transmit PA configuration.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getPowerLimits</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">getPowerLimits</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get min and max powerLevel for a power mode.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> powerMode
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">enablePaAutoMode</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">enablePaAutoMode</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control automatic PA selection based on the TX power level.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">configPaAutoMode</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[i32]</span>
+      <span class="command-handler">configPaAutoMode</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure entries in the default PA Auto Mode plugin.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>start Index
+        </li>
+        <li>
+        <span class="argument-name">i32</span><em>(optional)</em> min max mode band: PA auto config entries
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">sweepTxPower</span>
+      <span class="command-handler">sweepTxPower</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Sweep TX power for the current PA by toning at each level.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">offsetLqi</span>
+        <span class="command-argument">i32</span>
+      <span class="command-handler">offsetLqi</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Adjust the hardware's LQI value for received packets.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">i32</span>offset: signed value to add\n                    The resulting LQI is capped within 0..255 range.
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getRssi</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">getRssi</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get RSSI in dBm. It'll be invalid if receiver isn't ready.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> [0=don't wait] 1=wait for valid RSSI if possible
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">sweepPower</span>
+        <span class="command-argument">i32</span>
+        <span class="command-argument">i32</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">sweepPower</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Sweep power by toning low/high in a square wave fashion.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">i32</span>lowPower: deci-dBm
+        </li>
+        <li>
+        <span class="argument-name">i32</span>hiPower: deci-dBm
+        </li>
+        <li>
+        <span class="argument-name">u32</span>periodUs
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">startAvgRssi</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">[u16]</span>
+      <span class="command-handler">startAvgRssi</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Start AGC RSSI averaging.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>averageTimeUs
+        </li>
+        <li>
+        <span class="argument-name">u16</span><em>(optional)</em> channel: if different than current channel
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getAvgRssi</span>
+      <span class="command-handler">getAvgRssi</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get AGC RSSI averaging result.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxTone</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">setTxTone</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control tone transmission.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>0=Disable 1=Enable
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> antenna: [0]/1\n                    [uint32opt] mode: [0]/1=phaseNoise
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxStream</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">setTxStream</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control stream transmission.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>0=Disable 1=Enable
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> streamMode: 0=tone [1=PN9] 2=1010 3=phaseNoise\n                                See RAIL_StreamMode_t for other values.\n                    [uint32opt] antenna: [0]/1
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">status</span>
+      <span class="command-handler">getStatus</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Print the current status counters.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">fifoStatus</span>
+      <span class="command-handler">fifoStatus</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Print the current FIFO-related counters.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxHoldOff</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">setTxHoldOff</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control transmit hold-off (blocking of transmits).</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxDelay</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">setTxDelay</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the inter-packet delay for repeated TX.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>delayMilliseconds
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getTxDelay</span>
+      <span class="command-handler">getTxDelay</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the inter-packet millisecond delay for repeated TX.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxPayload</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">setTxPayload</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set TX packet payload bytes for future transmits.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>offset
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> byte0 byte1 ...
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxRandom</span>
+        <span class="command-argument">[u16]</span>
+      <span class="command-handler">setTxRandom</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set a specified range of bytes in the Tx packet payload to a\n                    random value. Call setTxRandom again to stop randomizing the payload.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span><em>(optional)</em> Start Index\n                    [uint16opt] End Index
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxPayloadQuiet</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">setTxPayloadQuiet</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Like setTxPayload, but less verbose.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>offset
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> byte0 byte1 ...
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxLength</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">setTxLength</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set how much data to load into the TX FIFO for transmitting.\n                    Actual packet length may vary based on radio configuration.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>lengthBytes
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">printTxPacket</span>
+      <span class="command-handler">printTxPacket</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Print the current TX payload data and byte length.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">peek</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">[u16]</span>
+      <span class="command-handler">peekRx</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Peek at the start of the receive buffer.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>bytes: 1-10
+        </li>
+        <li>
+        <span class="argument-name">u16</span><em>(optional)</em> offset: [0]
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getTime</span>
+      <span class="command-handler">getTime</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the current RAIL time in microseconds.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTime</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">setTime</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the current RAIL time.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>timeUs
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">dataConfig</span>
+        <span class="command-argument">str</span>
+        <span class="command-argument">str</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">dataConfig</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control the data methods for TX and RX.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">str</span>txMethod: 'pkt'/'fifo'
+        </li>
+        <li>
+        <span class="argument-name">str</span>rxMethod: 'pkt'/'fifo'
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> RAIL_RxDataSource_t (>0 needs fifo mode)\n                    [uint8opt] RAIL_TxDataSource_t (>0 needs ping-pong buffer)
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setRxFifo</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">setRxFifo</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the receive buffer length.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>lengthBytes: range 64-RX_BUFFER_SIZE
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxFifo</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">setTxFifo</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the transmit buffer length.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>lengthBytes: range 64-TX_BUFFER_SIZE, 0 for default size
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxFifoThreshold</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">setTxFifoThreshold</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the TX FIFO Almost Empty threshold.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>thresholdBytes: below which the event triggers
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setRxFifoThreshold</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">setRxFifoThreshold</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the RX FIFO Almost Full threshold.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>thresholdBytes: above which the event triggers
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">fifoModeTestOptions</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">fifoModeTestOptions</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Manual control over RAILtest FIFO actions.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>txFifo: 1=Manual 0=Automatic
+        </li>
+        <li>
+        <span class="argument-name">u8</span>rxFifo: 1=Manual 0=Automatic
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">rxFifoManualRead</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">rxFifoManualRead</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Read and print bytes from receive FIFO when in manual mode.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>appendedInfo: 1=include packet metadata
+        </li>
+        <li>
+        <span class="argument-name">u16</span>bytesToRead
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> [0=don't] 1=show timestamps with appendedInfo
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">txFifoManualLoad</span>
+      <span class="command-handler">txFifoManualLoad</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Try to load data into available TX FIFO space.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">fifoReset</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">fifoReset</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Reset the transmit and/or receive FIFO.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>tx: 1=reset TX FIFO
+        </li>
+        <li>
+        <span class="argument-name">u8</span>rx: 1=reset RX FIFO
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">abortRxPacket</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">abortRxPacket</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Idle the radio shortly after RX sync word detection.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>abortOffsetUs
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">printTxAcks</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">printTxAcks</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control printing of TX ACK packets.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>[0=Disable] 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">configRxHopping</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">configRxChannelHopping</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure an RX Channel Hopping sequence.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">configRxChannelHopping</span>
+      </div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> channel hopMode param delayUs: a hop's config,\n                                repeat for additional hops ...\n                    Use no arguments to get Z-Wave radio config defaults.
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">enableRxHopping</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">enableRxChannelHopping</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control RX channel hopping previously configured.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">enableRxChannelHopping</span>
+      </div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>[0=Disable] 1=Enable
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> [0=Continue] 1=Restart sequence
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">configRxHoppingOpts</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[i8]</span>
+      <span class="command-handler">configChannelHoppingOptions</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure options for a hop. Use configRxHopping after.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">configChannelHoppingOptions</span>
+      </div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>hopIndex
+        </li>
+        <li>
+        <span class="argument-name">u8</span>options
+        </li>
+        <li>
+        <span class="argument-name">i8</span><em>(optional)</em> rssiThreshold: dBm for the threshold option
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">configRxMultiHop</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">configChannelHoppingMulti</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure multi-sense for a hop. Use configRxHopping after.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">configChannelHoppingMulti</span>
+      </div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>hopIndex
+        </li>
+        <li>
+        <span class="argument-name">u32</span>syncDetectUs
+        </li>
+        <li>
+        <span class="argument-name">u32</span>preambleSenseUs
+        </li>
+        <li>
+        <span class="argument-name">u32</span>timingSenseUs
+        </li>
+        <li>
+        <span class="argument-name">u32</span>timingReSenseUs
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">triggerRxHop</span>
+      <span class="command-handler">triggerRxHop</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Trigger a manual RX channel hopping hop.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getRxHoppingRssi</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">getChannelHoppingRssi</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the latest RSSI for a hopping channel.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">getChannelHoppingRssi</span>
+      </div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>hopIndex
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">spectrumAnalyzer</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u16]</span>
+      <span class="command-handler">spectrumAnalyzer</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Hop across a channel range to see the RSSI distribution.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>1=Show ASCII-Art graph (non-parseable output)
+        </li>
+        <li>
+        <span class="argument-name">u16</span><em>(optional)</em> minChannel: [0]-65535\n                    [uint16opt] maxChannel: 0-[65535]\n                    Channel range is limited by the PHY and by hopping's\n                    MAX_NUMBER_CHANNELS.
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">configRxDutyCycle</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">i32</span>
+        <span class="command-argument">i32</span>
+        <span class="command-argument">[i32]</span>
+      <span class="command-handler">configRxDutyCycle</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure RX Duty Cycling of the receiver.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>hopMode
+        </li>
+        <li>
+        <span class="argument-name">i32</span>parameter(s) {syncUs preamUs timingUs retimingUs}
+        </li>
+        <li>
+        <span class="argument-name">i32</span>delayUs
+        </li>
+        <li>
+        <span class="argument-name">i32</span><em>(optional)</em> options\n                    [int32opt] rssiThreshold: dBm for the threshold option
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">enableRxDutyCycle</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">enableRxDutyCycle</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control RX duty cycling previously configured.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>DutyCycling: 0=Disable 1=Enable
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> ScheduledWakeup: [0=Disable] 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getDefaultRxDutyCycleConfig</span>
+      <span class="command-handler">getDefaultRxDutyCycleConfig</span>
+    </div>
+    <div class="command-info">
+      <div class="help"> Get the default RX duty cycle configuration.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxAltPreambleLen</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">setTxAltPreambleLen</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set alternate TX preamble length, enabled via txOptions.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>preambleBits
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">configSyncWords</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">configSyncWords</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set sync words and their length. The radio must be off.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>bits: 2-32
+        </li>
+        <li>
+        <span class="argument-name">u32</span>syncWord1
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> syncWord2: [same as syncWord1]
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">enableAutoLnaBypass</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">enableAutoLnaBypass</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Enable automatic LNA bypass for external FEM.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>[0=Disable] 1=Enable
+        </li>
+        <li>
+        <span class="argument-name">u32</span>timeoutUs
+        </li>
+        <li>
+        <span class="argument-name">u8</span>threshold
+        </li>
+        <li>
+        <span class="argument-name">u8</span>deltaRssiDbm = FEM LNA gain
+        </li>
+        <li>
+        <span class="argument-name">u8</span>port
+        </li>
+        <li>
+        <span class="argument-name">u8</span>pin
+        </li>
+        <li>
+        <span class="argument-name">u8</span>polarity
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getSyncWords</span>
+      <span class="command-handler">getSyncWords</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the sync word length in bits and value(s).</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">printRxErrors</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">printRxErrors</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control printing of RX error packets.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>[0=Disable] 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">printRxFreqOffsets</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">printRxFreqOffsets</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control printing of RX frequency offsets.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>[0=Disable] 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">printDataRates</span>
+      <span class="command-handler">printDataRates</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Print the data rates of the current PHY.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">stopInfinitePream</span>
+      <span class="command-handler">stopInfinitePreambleTx</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Stops an infinite preamble transmission.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">stopInfinitePreambleTx</span>
+      </div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">___________________________________</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____Energy_Modes_and_RF_Sensing____</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">sleep</span>
+        <span class="command-argument">str</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">sleep</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Sleep until UART input or RF Sensed (if either configured).</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">str</span>energyMode: 0-4[hs], for EM1P use 2 with radio on
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> Legacy: RfSenseUs\n                                        RfBand: 0=none,1=GHz,2=MHz,3=both\n                          or Selective: SyncwordBytes Syncword RfBand
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">rfsense</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">rfSense</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Start RfSensing.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>Legacy: RfSenseUs; Selective: SyncwordBytes
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> Legacy: RfBand: 0=none,1=GHz,2=MHz,3=both\n                          or Selective: Syncword RfBand: as above
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">configRfSenseWakeup</span>
+      <span class="command-handler">configRfSenseSelectiveOokWakeupPhy</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure RFSense Selective Wakeup PHY for transmitting.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">configRfSenseWakeupPhy</span>
+      </div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setRfSenseTxPayload</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">setRfSenseTxPayload</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Load TX FIFO with RfSense Selective(OOK) Mode wake packet.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>syncwordNumBytes: 1-4
+        </li>
+        <li>
+        <span class="argument-name">u32</span>syncWord: sent from least to most significant byte
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">_________________________</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____Address_Filtering____</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">configAddressFilter</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">setAddressFilterConfig</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure the addresss filter.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>matchTable
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> offset0 size0 offset1 size1 ...\n                    Enter more offsets and sizes if required.
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setAddressFiltering</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setAddressFilter</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control address filtering.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getAddressFiltering</span>
+      <span class="command-handler">getAddressFilter</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the current state of address filtering.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">printAddresses</span>
+      <span class="command-handler">printAddresses</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Print the current address filtering addresses.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setAddress</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">setAddress</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set a specific filtering address value.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>field: 0-1
+        </li>
+        <li>
+        <span class="argument-name">u8</span>filterIndex: 0-3
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> addrByte0 addrByte1 ... addrByte7
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setAddressMask</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">setAddressMask</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set a specific filtering address mask.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>field: 0-1
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> bitMask
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setAddressEnable</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">enableAddress</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control address filtering for a specific address.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>field: 0-1
+        </li>
+        <li>
+        <span class="argument-name">u8</span>filterIndex: 0-3
+        </li>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">__________________________</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____Error_Rate_Testing____</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">perRx</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">startPerMode</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Start a Packet Error Rate test. 'perRx 0 0' stops test.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>number of packets
+        </li>
+        <li>
+        <span class="argument-name">u32</span>delayUs
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">perStatus</span>
+      <span class="command-handler">getPerStats</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the PER test results. Also see status command.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setBerConfig</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">berConfigSet</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set number of bytes to receive in BER mode.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>number of bytes: 0=maximum (536870911)
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">berRx</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">berRx</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control BER receive mode.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">berStatus</span>
+      <span class="command-handler">berStatusGet</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get status of current or last BER test.\n                    Status is reset by setBerConfig and berRx enable.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">______________________________</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____Listen_Before_Talk_LBT____</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setLbtMode</span>
+        <span class="command-argument">[str]</span>
+      <span class="command-handler">setLbtMode</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Show/Set the LBT mode for transmits.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">str</span><em>(optional)</em> 'off'/'csma'/'lbt'
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getLbtParams</span>
+      <span class="command-handler">getLbtParams</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the current LBT parameters.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setLbtParams</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">i32</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">setLbtParams</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set LBT parameters.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>minBo
+        </li>
+        <li>
+        <span class="argument-name">u8</span>maxBo
+        </li>
+        <li>
+        <span class="argument-name">u8</span>tries
+        </li>
+        <li>
+        <span class="argument-name">i32</span>ccaThreshold
+        </li>
+        <li>
+        <span class="argument-name">u16</span>backoffUs
+        </li>
+        <li>
+        <span class="argument-name">u16</span>durationUs
+        </li>
+        <li>
+        <span class="argument-name">u32</span>timeoutUs
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">set802154CcaMode</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">set802154CcaMode</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set 802.15.4 CCA Mode</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>ccaMode 0=RSSI 1=Signal 2=RSSI|Signal 3=RSSI&Signal 4=Always transmit
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">_____________________</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____802_15_4_Mode____</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">enable802154</span>
+        <span class="command-argument">str</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">i16</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">ieee802154Enable</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure and enable 802.15.4 mode.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">str</span>defaultState: 'idle'/'rx'
+        </li>
+        <li>
+        <span class="argument-name">u16</span>idleToRxUs
+        </li>
+        <li>
+        <span class="argument-name">u16</span>turnaroundTimeUs
+        </li>
+        <li>
+        <span class="argument-name">i16</span>ackTimeoutUs: to ACK's sync-detect
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> defaultFP: [0]/1 Frame Pending for poll ACKs
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">list2p4Ghz802154Configs</span>
+      <span class="command-handler">list2p4Ghz802154Configs</span>
+    </div>
+    <div class="command-info">
+      <div class="help">List supported 2.4 GHz 802.15.4 configs.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">config2p4GHz802154</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">config2p4Ghz802154</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure the radio for 2.4 GHz 802.15.4.\n                    Use with enable802154.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> [uint8opt] config: see list2p4Ghz802154Configs (ignores any remaining parameters if > 1)\n                    [uint8opt] coex: [0=Disable] 1=Enable\n                    [uint8opt] fem: [0=Disable] 1=Enable\n                    [uint8opt] custom: [0=None] 1=Custom1\n                    [uint8opt] 2mbps: [0=Disable]  1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">config863MHz802154</span>
+      <span class="command-handler">config863Mhz802154</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure the radio for 863 MHz 802.15.4 GB868.\n                    Use with enable802154.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">config915MHz802154</span>
+      <span class="command-handler">config915Mhz802154</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure the radio for 915 MHz 802.15.4 GB868.\n                    Use with enable802154.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">set802154e</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">ieee802154SetE</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure 802.15.4E options.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>RAIL_IEEE802154_EOptions_t
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">set802154g</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">ieee802154SetG</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure 802.15.4G options.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>RAIL_IEEE802154_GOptions_t
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">set802154FpMode</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">ieee802154SetFpMode</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control early and data frame pending lookup.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>early:     [0=Disable] 1=Enable
+        </li>
+        <li>
+        <span class="argument-name">u8</span>dataframes:[0=Disable] 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">config2Mbps802154RxTimeout</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">ieee802154Config2MbpsRxTimeout</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure timeout to switch back from 2Mbps PHY to standard 250kbps PHY.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>timeout
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">config2Mbps802154RxChannel</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">ieee802154Config2MbpsRxChannel</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure channel to receive 2Mbps mode switch packets.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>channel
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">acceptFrames</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">ieee802154AcceptFrames</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control 802.15.4 frame type acceptance.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>command: 0=Reject [1=Accept]
+        </li>
+        <li>
+        <span class="argument-name">u8</span>ack:    [0=Reject] 1=Accept
+        </li>
+        <li>
+        <span class="argument-name">u8</span>data:    0=Reject [1=Accept]
+        </li>
+        <li>
+        <span class="argument-name">u8</span>beacon:  0=Reject [1=Accept]
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> multipurpose: [0=Reject] 1=Accept
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setPromiscuousMode</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">ieee802154SetPromiscuousMode</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control promiscuous mode.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setRxToEnhAckTx</span>
+        <span class="command-argument">i32</span>
+      <span class="command-handler">setRxToEnhAckTx</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set an RxToTx turnaround time used just for Enh-ACKs.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">i32</span>rxToTxUs (0=same as Imm-ACKs, -1=don't change)
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setPanCoordinator</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">ieee802154SetPanCoordinator</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control whether node is a PAN coordinator.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>1=Yes 0=No
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setPanId802154</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">ieee802154SetPanId</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the PAN ID for a filtering index.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>panId
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> filterIndex: [0]-2
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setShortAddr802154</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">ieee802154SetShortAddress</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the short address for a filtering index.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>shortAddr
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> filterIndex: [0]-2
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setLongAddr802154</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">ieee802154SetLongAddress</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the long address for a filtering index.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>longAddr_0
+        </li>
+        <li>
+        <span class="argument-name">u8</span>longAddr_1
+        </li>
+        <li>
+        <span class="argument-name">u8</span>longAddr_2
+        </li>
+        <li>
+        <span class="argument-name">u8</span>longAddr_3
+        </li>
+        <li>
+        <span class="argument-name">u8</span>longAddr_4
+        </li>
+        <li>
+        <span class="argument-name">u8</span>longAddr_5
+        </li>
+        <li>
+        <span class="argument-name">u8</span>longAddr_6
+        </li>
+        <li>
+        <span class="argument-name">u8</span>longAddr_7
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> filterIndex: [0]-2
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setAddresses802154</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">[str]</span>
+      <span class="command-handler">ieee802154SetAddresses</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set all 802.15.4 address information.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>panId0
+        </li>
+        <li>
+        <span class="argument-name">u16</span>shortAddr0
+        </li>
+        <li>
+        <span class="argument-name">str</span><em>(optional)</em> longAddr0\n                    [stringopt] panId1 shortAddr1 longAddr1 ...
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">configRxChannelSwitching802154</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">ieee802154ConfigRxChannelSwitching</span>
+    </div>
+    <div class="command-info">
+      <div class="help"> Configure RX channel switching for 2.4 GHz 802.15.4</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>First radio channel
+        </li>
+        <li>
+        <span class="argument-name">u16</span>Second radio channel
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setDataReqLatency</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">ieee802154SetDataReqLatency</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set data request event processing latency.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>latencyUs
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">set802154PHR</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">ieee802154SetPHR</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set PHR (first 1, 2 or 4 bytes) in Tx buffer according to\n                      the 'format' input parameter.\n                    PHR 'frameLength' field is derived from TxLength set\n                      previously with 'setTxLength'\n                    For PHR fields info, refer to 802.15.4 specification.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>PHR format: 0=misc IEEE802154 modulations, PHR 1byte\n                                        1=SUN FSK, PHR 2bytes\n                                        2=SUN OFDM, PHR 4bytes\n                                        3=SUN OQPSK, PHR 4bytes
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> For LEG_OQPSK: none\n                               For SUN_FSK  : fcsTtype\n                               For SUN_OFDM : rate\n                               For SUN_OQPSK: spreadingMode\n                    [uint8opt] For LEG_OQPSK: none\n                               For SUN_FSK  : whitening\n                               For SUN_OFDM : scrambler\n                               For SUN_OQPSK: rateMode
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">trigModeSwitchTx</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">trigModeSwitchTx</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Transmit a Mode Switch packet then transmit packets on the new PHY with current\n                    TX options Depending on modeSwitchLife configuration, after all iterations are\n                    done, it either stays on the new PHY or returns to the base PHY.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>new PhyModeId, i.e. ID of the PHYMode we are switching to
+        </li>
+        <li>
+        <span class="argument-name">u8</span>number of packets transmitted on the new PHY
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> number of times the sequence -mode switch packet followed by data packets- is\n                    repeated, default is 1 if argument is absent\n                    [uint32opt] delayMilliseconds before switching back to base PHY after all packets have been\n                    transmitted on the new PHY, default is 0 if argument is absent. Multitimer is\n                    used for delay greater than 0.
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">modeSwitchLife</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">modeSwitchLife</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Return to the base PHY after all data packets transmission for TX or after\n                    MODE_SWITCH_START event and multitimer expiration after first data packet\n                    reception on new phy for RX.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=stay on new PHY (normal Wi-SUN FAN behaviour) 1=return to base PHY (special test mode)
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">________________</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____BLE_Mode____</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setBleMode</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">bleEnable</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control BLE mode.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getBleMode</span>
+      <span class="command-handler">bleStatus</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the current BLE mode.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setBleChannelParams</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">bleSetChannelParams</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure channel parameters related to BLE.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>logicalChannel
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> accessAddr crcInit disableWhiten
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setBlePhySwitchToRx</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">blePhySwitchToRx</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure BLE PhySwitchToRx parameters. RX is\n                    entered timeDeltaUs after sync word of received packet.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable, >0=number of RX switches to perform
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> phy timeDelta physicalChannel\n                    [uint32opt] logicalChannel accessAddr crcInit\n                    [uint32opt] disableWhiten\n                    [uint32opt] extraDelayUs
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setBleAdvertising</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">bleAdvertisingConfig</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure for BLE advertising.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>advChannel: 37-39
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setBle1Mbps</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">bleSet1MbpsPhy</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Switch to the 1Mbps BLE PHY.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> 0=Legacy 1=Viterbi [chip default]
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setBle2Mbps</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">bleSet2MbpsPhy</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Switch to the 2Mbps BLE PHY.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> 0=Legacy 1=Viterbi [chip default]
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setBleCoding</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">bleSetCoding</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Switch to a BLE coded PHY.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>RAIL_BLE_Coding_t value
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setBleSimulscan</span>
+      <span class="command-handler">bleSetSimulscan</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Switch to a BLE simulscan PHY.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">___________________</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____WMBUS_Mode____</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">configWmbus</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">configWmbus</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure WMBUS simultaneous M2O RX of T and C modes</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">_______________</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____Z_Wave_Mode____</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setZWaveMode</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">zwaveEnable</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Show/Control Z-Wave mode.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> 0=Disable 1=Enable\n                    [uint8opt] optionsBitmask
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getZWaveMode</span>
+      <span class="command-handler">zwaveStatus</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the current Z-Wave mode.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setZWaveRegion</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">zwaveSetRegion</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the Z-Wave region.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>region: see listZWaveRegions
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">performZwaveIrcal</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">zwavePerformIrcal</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Perform IRCAL across all channels of the current Z-Wave region.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> [0=Use cached IRCAL values], 1=Force IRCAL
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getZWaveRegion</span>
+      <span class="command-handler">zwaveGetRegion</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the current Z-Wave region.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">listZWaveRegions</span>
+      <span class="command-handler">zwaveListRegions</span>
+    </div>
+    <div class="command-info">
+      <div class="help">List supported Z-Wave regions.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getZWaveBaudRate</span>
+      <span class="command-handler">zwaveGetBaudRate</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the baudrate of the current Z-Wave channel.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setZWaveNodeId</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">zwaveSetNodeId</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Sets Z-Wave NodeId.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>nodeId
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setZWaveHomeId</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">zwaveSetHomeId</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Sets Z-Wave HomeId and its hash.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>homeId
+        </li>
+        <li>
+        <span class="argument-name">u8</span>hash
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setZWaveOptions</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">zwaveConfigureOptions</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure Z-Wave options.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> optionsBitmask
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setZWaveLowPower</span>
+        <span class="command-argument">i32</span>
+        <span class="command-argument">[str]</span>
+      <span class="command-handler">zwaveSetLowPowerLevel</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the transmit power for low-power ACKing.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">i32</span>power: deci-dBm unless 'raw' is added
+        </li>
+        <li>
+        <span class="argument-name">str</span><em>(optional)</em> 'raw'=units are raw power level
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getZWaveLowPower</span>
+      <span class="command-handler">zwaveGetLowPowerLevel</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the low power values (deci-dBm and raw).</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">zwaveReceiveBeam</span>
+      <span class="command-handler">zwaveReceiveBeam</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Run the Z-Wave beam detection algorithm.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setMfmMode</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">mfmEnable</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set MFM mode to enabled or disabled</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getMfmMode</span>
+      <span class="command-handler">mfmStatus</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the current MFM mod</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">__________________</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____RAIL_Timer____</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTimer</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">str</span>
+      <span class="command-handler">setTimer</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the RAIL timer timeout.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>timeout: per mode
+        </li>
+        <li>
+        <span class="argument-name">str</span>'rel'=Relative 'abs'=Absolute
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">timerCancel</span>
+      <span class="command-handler">timerCancel</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Cancel the RAIL timer if it is active.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">printTimerStats</span>
+      <span class="command-handler">printTimerStats</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Print current timer configuration.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">enableMultiTimer</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">enableMultiTimer</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control the multiTimer API.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setMultiTimer</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">str</span>
+      <span class="command-handler">setMultiTimer</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set a specific timer timeout.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>timer: 0..(NUM_MULTI_TIMERS-1)
+        </li>
+        <li>
+        <span class="argument-name">u32</span>timeout: per mode
+        </li>
+        <li>
+        <span class="argument-name">str</span>'rel'=Relative 'abs'=Absolute
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">multiTimerCancel</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">multiTimerCancel</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Cancel a specific timer if it is active.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>timer: 0..(NUM_MULTI_TIMERS-1)
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getMultiTimerStats</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">printMultiTimerStats</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get information about a specific timer.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">printMultiTimerStats</span>
+      </div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>timer: 0..(NUM_MULTI_TIMERS-1)
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">delayUs</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">delayUs</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Do a blocking delay for a specified time.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>delayUs
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____________________</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____Auto_ACK_ing____</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">autoAckConfig</span>
+        <span class="command-argument">str</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">autoAckConfig</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure and enable auto-ACK functionality.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">str</span>defaultState: 'idle'/'rx'
+        </li>
+        <li>
+        <span class="argument-name">u16</span>idleToRxUs
+        </li>
+        <li>
+        <span class="argument-name">u16</span>turnaroundTimeUs
+        </li>
+        <li>
+        <span class="argument-name">u16</span>ackTimeoutUs: to ACK's sync-detect
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">autoAckDisable</span>
+      <span class="command-handler">autoAckDisable</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Disable auto-ACK. Use autoAckConfig to reenable.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setAckPayload</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">setAckPayload</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the ACK payload to transmit.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>offset
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> byte0 byte1 ...
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setAckLength</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">setAckLength</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set how much data to load into the TXACK FIFO.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>lengthBytes
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">printAckPacket</span>
+      <span class="command-handler">printAckPacket</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Print the current TXACK payload data and byte length.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getAutoAck</span>
+      <span class="command-handler">getAutoAck</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the current state of auto-ACKing.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">autoAckPause</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">autoAckPause</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Pause or Resume auto-ACKing</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>1=PauseRx 0=ResumeRx
+        </li>
+        <li>
+        <span class="argument-name">u8</span>1=PauseTx 0=ResumeTx
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxAckOptions</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setTxAckOptions</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control auto-ACK response for just the next receive.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>1=cancelAck 0=sendAck
+        </li>
+        <li>
+        <span class="argument-name">u8</span>1=useTxBuf 0=useTxAckBuf
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxAckDirect</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setTxAckDirect</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control direct access to TXACK FIFO (RAIL_GetAutoAckFifo).</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=indirect-access 1=direct-access
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">______________________</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____GPIO_Functions____</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setGpioOutPin</span>
+        <span class="command-argument">str</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setGpioOutPin</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set a GPIO pin data out bit.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">str</span>gpioPort: start from '0' or 'a' or 'A'
+        </li>
+        <li>
+        <span class="argument-name">u8</span>gpioPin
+        </li>
+        <li>
+        <span class="argument-name">u8</span>state: 0/1
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setAntDivPin</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">setAntDivPin</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set output pin for antenna diversity.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>Antenna0 gpioPort (0=A, 1=B, etc.)
+        </li>
+        <li>
+        <span class="argument-name">u8</span>Antenna0 gpioPin
+        </li>
+        <li>
+        <span class="argument-name">u8</span>Antenna1 gpioPort (0=A, 1=B, etc.)
+        </li>
+        <li>
+        <span class="argument-name">u8</span>Antenna1 gpioPin
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> Antenna0 gpioPin State: 0=Disable [1=Enable]\n                    [uint8opt] Antenna1 gpioPin State: 0=Disable [1=Enable]
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">___________________________</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">____Diagnostic_and_Test____</span>
+      <span class="command-handler">cliSeparatorHack</span>
+    </div>
+    <div class="command-info">
+      <div class="help"></div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getConfigIndex</span>
+      <span class="command-handler">getConfigIndex</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the index of the current multi-PHY radio config.\n                    See the entries in *channelConfigs[]. Start with index 0.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setConfigIndex</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u16]</span>
+      <span class="command-handler">setConfigIndex</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Activate a multi-PHY radio configuration.\n                    See the entries in *channelConfigs[]. Start with index 0.\n                    If optional 'channel' parameter is not provided, the first available channel is set.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>multiPhyIndex
+        </li>
+        <li>
+        <span class="argument-name">u16</span><em>(optional)</em> channel
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setCtune</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">setCtune</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the value of HFXO CTUNE. The radio must be IDLE.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>ctune
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getCtune</span>
+      <span class="command-handler">getCtune</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the value of HFXO CTUNE</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setCtuneDelta</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">setCtuneDelta</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the value of HFXO CTUNE delta</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>delta
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getCtuneDelta</span>
+      <span class="command-handler">getCtuneDelta</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the value of HFXO CTUNE delta</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setPaCtune</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setPaCtune</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the PACTUNE value for TX and RX.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>txPaCtune
+        </li>
+        <li>
+        <span class="argument-name">u8</span>rxPaCtune
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">enablePaCal</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">enablePaCal</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control PA power calibration.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setDebugSignal</span>
+        <span class="command-argument">str</span>
+        <span class="command-argument">str</span>
+        <span class="command-argument">[u16]</span>
+      <span class="command-handler">setDebugSignal</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure chip specific debug output.\n                    Use 'setDebugSignal help me' for more details.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">str</span>pin
+        </li>
+        <li>
+        <span class="argument-name">str</span>signal
+        </li>
+        <li>
+        <span class="argument-name">u16</span><em>(optional)</em> signalOptions
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setDebugMode</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">setDebugMode</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control Debug mode which allows freqOverride.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">freqOverride</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">setFrequency</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the radio frequency. Requires debug mode.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>freqHz: Only small deviations from the\n                                     current configuration are supported.
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">configDirectMode</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">configDirectMode</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Configure direct mode</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>syncRx: 0=Disable 1=Enable
+        </li>
+        <li>
+        <span class="argument-name">u8</span>syncTx: 0=Disable 1=Enable
+        </li>
+        <li>
+        <span class="argument-name">u8</span>doutPort
+        </li>
+        <li>
+        <span class="argument-name">u8</span>doutPin
+        </li>
+        <li>
+        <span class="argument-name">u8</span>dclkPort
+        </li>
+        <li>
+        <span class="argument-name">u8</span>dclkPin
+        </li>
+        <li>
+        <span class="argument-name">u8</span>dinPort
+        </li>
+        <li>
+        <span class="argument-name">u8</span>dinPin
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> doutLoc\n                    [uint8opt] dclkLoc\n                    [uint8opt] dinLoc
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">directMode</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setDirectMode</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control direct mode.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">directTx</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setDirectTx</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control TX in direct mode.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">txCancel</span>
+        <span class="command-argument">i32</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">txCancel</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Start a TX that will be cancelled.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">i32</span>delayUs: when to cancel it
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> stopMode: [0=RAIL_IDLE_ABORT] 1-3=RAIL_StopMode_t\n                                         4-7=4+RAIL_IdleMode_t
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">configHFXOThermistor</span>
+      <span class="command-handler">configHFXOThermistor</span>
+    </div>
+    <div class="command-info">
+      <div class="help"> Configures the thermistor pin and the HFXO compensation parameters.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">startThermistor</span>
+      <span class="command-handler">startThermistorMeasurement</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Starts a thermistor measurement.\n                    Triggers the HFXO temperature compensation if enabled.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">startThermistorMeasurement</span>
+      </div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getThermistor</span>
+      <span class="command-handler">getThermistorImpedance</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Gets the thermistor impedance.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">getThermistorImpedance</span>
+      </div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getRandom</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">getRandom</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get random data from the radio.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>lengthBytes
+        </li>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> [0=show them] 1=hide them
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxUnderflow</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setTxUnderflow</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control TX underflows by not loading the TX FIFO.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>1=Force underflows 0=Disable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setRxOverflow</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">setRxOverflow</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control RX overflows by delaying in the event handler.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> delayUs: [0]
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setCalibrations</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setCalibrations</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control calibrations.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxTransitions</span>
+        <span class="command-argument">str</span>
+        <span class="command-argument">str</span>
+      <span class="command-handler">setTxTransitions</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the TX state transitions.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">str</span>txSuccess: 'idle'/'rx'
+        </li>
+        <li>
+        <span class="argument-name">str</span>txError: 'idle'/'rx'
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setRxTransitions</span>
+        <span class="command-argument">str</span>
+        <span class="command-argument">str</span>
+      <span class="command-handler">setRxTransitions</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the RX state transitions.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">str</span>rxSuccess: 'idle'/'rx'/'tx'
+        </li>
+        <li>
+        <span class="argument-name">str</span>rxError: 'idle'/'rx'/'tx'
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getTxTransitions</span>
+      <span class="command-handler">getTxTransitions</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the TX state transitions.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getRxTransitions</span>
+      <span class="command-handler">getRxTransitions</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the RX state transitions.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setNextTxRepeat</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">setNextTxRepeat</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set next transmit's automatic repeat count.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>number of auto-repeated transmits after the first
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> delayUs inter-transmit or hop delay\n                    [uint32opt] channel (if hopping)\n                    repeat delayUs and channel for additional hops.
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">configTxRepeatStartToStart</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">configTxRepeatStartToStart</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set tx repeat option to have tx repeats delaying from start of tx to start of tx.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0 to disable, 1 to enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setNextBleTxRepeat</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">setNextBleTxRepeat</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set next transmit's automatic repeat count.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>number of auto-repeated transmits after the first
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> delayUs inter-transmit or hop delay\n                    [uint32opt] phy railChannel logicalChannel accessAddress\n                    (a hop's config, repeat from delayUs for additional hops)
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTxTimePos</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setTxTimePos</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set desired TX timestamp position.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>RAIL_PacketTimePosition_t
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setRxTimePos</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setRxTimePos</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set desired RX timestamp position.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>RAIL_PacketTimePosition_t
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setTimings</span>
+        <span class="command-argument">i32</span>
+        <span class="command-argument">i32</span>
+        <span class="command-argument">i32</span>
+        <span class="command-argument">[i32]</span>
+      <span class="command-handler">setTimings</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set RAIL state transition timings (use -1 to keep same).</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">i32</span>idleToRxUs
+        </li>
+        <li>
+        <span class="argument-name">i32</span>txToRxUs
+        </li>
+        <li>
+        <span class="argument-name">i32</span>idleToTxUs
+        </li>
+        <li>
+        <span class="argument-name">i32</span><em>(optional)</em> rxToTxUs [0]\n                    [int32opt] rxSearchTimeoutUs [0]\n                    [int32opt] txToRxSearchTimeout [0]\n                    [int32opt] txToTx [0]
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">forceAssert</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">forceAssert</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Force a RAIL assert with the given error code.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>RAIL_AssertErrorCodes_t
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getAppMode</span>
+      <span class="command-handler">getAppMode</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the current RAILtest AppMode_t mode.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getRadioState</span>
+      <span class="command-handler">getRadioState</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the current RAIL_RadioState_t radio state.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">verifyRadio</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">verifyRadio</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Verify radio memory contents.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>durationUs: time limit
+        </li>
+        <li>
+        <span class="argument-name">u8</span>0=Resume if previously didn't finish 1=Restart
+        </li>
+        <li>
+        <span class="argument-name">u8</span>0=current radio config 1=external radio config
+        </li>
+        <li>
+        <span class="argument-name">u8</span>0=No callback 1=Use RAILCb_ConfigVerification
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getChannel</span>
+      <span class="command-handler">getChannel</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get the current radio channel.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setChannel</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">setChannel</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the radio channel.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>channel
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setPktOffsetInTxFifo</span>
+        <span class="command-argument">[u16]</span>
+      <span class="command-handler">setPktOffsetInTxFifo</span>
+    </div>
+    <div class="command-info">
+      <div class="help"> Set the offset in number of bytes of the Tx Data in Tx Fifo.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span><em>(optional)</em> Offset in number of  bytes. If no parameter specified, command returns current active Offset
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">reset</span>
+      <span class="command-handler">resetChip</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Perform a reboot of the chip.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">writeRmrStructure</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">CI_writeRmrStructure</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Reserved for Simplicity Studio use only.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>
+        </li>
+        <li>
+        <span class="argument-name">u16</span>
+        </li>
+        <li>
+        <span class="argument-name">u8</span>
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> 
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">updateConfigPtr</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u16</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">CI_updateConfigurationPointer</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Reserved for Simplicity Studio use only.</div>
+      
+      <div class="alias-list">
+      <span class="aliases-title">Alias</span>
+      <span class="alias">updateConfigurationPointer</span>
+      </div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>
+        </li>
+        <li>
+        <span class="argument-name">u16</span>
+        </li>
+        <li>
+        <span class="argument-name">u8</span>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">reconfigureModem</span>
+      <span class="command-handler">CI_reconfigureModem</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Reserved for Simplicity Studio use only.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setRfPath</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">CI_SetRfPath</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the RF path.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>0=Path0 1=Path1
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">printEvents</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">configPrintEvents</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Show/Configure printing of RAIL events as they occur.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> printEvents<31:0> printEvents<63:32>\n                    [uint32opt] mask<31:0> mask<63:32>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">printChipFeatures</span>
+      <span class="command-handler">printChipFeatures</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Display RAIL features supported at compile and runtime.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getmemw</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">getMemWord</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Read count 32-bit words starting at address.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>address
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> count
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setmemw</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">[u32]</span>
+      <span class="command-handler">setMemWord</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Write 32-bit values starting at address.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>address
+        </li>
+        <li>
+        <span class="argument-name">u32</span><em>(optional)</em> value0 value1 ...
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">throughput</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">throughput</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Throughput test.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>number of packets
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setRssiOffset</span>
+        <span class="command-argument">i32</span>
+      <span class="command-handler">setRssiOffset</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Sets the RSSI offset.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">i32</span>offsetDbm
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getRssiOffset</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">getRssiOffset</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Gets the RSSI offset(s) in dBm.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> [0=radio and protocol-specific] 1=radio only
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setRssiDetectThreshold</span>
+        <span class="command-argument">i8</span>
+      <span class="command-handler">setRssiDetectThreshold</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Sets the RSSI detect threshold.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">i8</span>RSSI detect threshold (in dBm). (-128 disables detection)
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getRssiDetectThreshold</span>
+      <span class="command-handler">getRssiDetectThreshold</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Gets the RSSI detect threshold(in dBm).</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">txAt</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">[str]</span>
+      <span class="command-handler">txAtTime</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Transmit a packet at a certain time.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>time: per mode
+        </li>
+        <li>
+        <span class="argument-name">str</span><em>(optional)</em> ['abs'=Absolute] 'rel'=Relative\n                    [stringopt] 'abort' RX if TX occurs during packet RX\n                                    otherwise TX is delayed to end of RX
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">txAtN</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">[str]</span>
+      <span class="command-handler">txAtTimeN</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Transmit multiple packets starting at a certain time.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>number of transmits
+        </li>
+        <li>
+        <span class="argument-name">u32</span>time: per mode
+        </li>
+        <li>
+        <span class="argument-name">str</span><em>(optional)</em> ['abs'=Absolute] 'rel'=Relative\n                    [stringopt] 'abort' RX if TX occurs during packet RX\n                                    otherwise TX is delayed to end of RX
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setFreqOffset</span>
+        <span class="command-argument">[i32]</span>
+      <span class="command-handler">setFreqOffset</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Get/Set the frequency offset adjustment.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">i32</span><em>(optional)</em> RAIL_FrequencyOffset_t
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">holdRx</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">holdRx</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control holding of received packets.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>[0=Process packets immediately] 1=Hold packets
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">wait</span>
+        <span class="command-argument">u32</span>
+        <span class="command-argument">[str]</span>
+      <span class="command-handler">wait</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Suspend processing of CLI input for a while.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>waitTimeUs
+        </li>
+        <li>
+        <span class="argument-name">str</span><em>(optional)</em> ['rel'=Relative] 'abs'=Absolute
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">clearScript</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">clearScript</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Clear the script entered via enterScript.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> [0=RAM] 1=Flash
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">printScript</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">printScript</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Print the script entered via enterScript.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> [0=RAM] 1=Flash
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">enterScript</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">enterScript</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Enter script entry mode.\n                    Conclude entry mode with text 'endScript'.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> [0=RAM] 1=Flash-script will run on boot
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">runScript</span>
+        <span class="command-argument">[u8]</span>
+      <span class="command-handler">runScript</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Run the script entered via enterScript.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span><em>(optional)</em> [0=RAM] 1=Flash-script will run on boot
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setRetimeOption</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">setRetimeOption</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Control retime options.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>optionBitMask: 1=HFXO | 2=HFRCO | 4=DCDC | 8=LCD
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">enable802154SignalIdentifier</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">enable802154SignalIdentifier</span>
+    </div>
+    <div class="command-info">
+      <div class="help"> Enable Signal Identifier 2.4Ghz 802.15.4 signal detection</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">enableBleSignalIdentifier</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">enableBleSignalIdentifier</span>
+    </div>
+    <div class="command-info">
+      <div class="help"> Enable Signal Identifier for BLE signal detection</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>Mode 0=Disable 1=BLE1Mbps 2=BLE2Mbps
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getChannelConfigEntry</span>
+        <span class="command-argument">u8</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">getChannelConfigEntry</span>
+    </div>
+    <div class="command-info">
+      <div class="help">   Get the maximum valid channelConfig index, the maximum\n                    valid channelConfigEntry index in the selected channelConfig\n                    and the parameters of the selected channelConfigEntry</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>channelConfig index
+        </li>
+        <li>
+        <span class="argument-name">u8</span>channelConfigEntry index
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">deinitProtocol</span>
+      <span class="command-handler">deinitProtocol</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Deinit the current protocol (BLE, 802.15.4, Z-Wave)</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">enableCacheSynthCal</span>
+        <span class="command-argument">u8</span>
+      <span class="command-handler">enableCacheSynthCal</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Sequencer will start caching the calibration values on next\n                    state transition and use them instead of calibrating again\n                    for future state transitions. Recalibration will occur when\n                    needed (eg. protocol change, temperature change)</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u8</span>0=Disable 1=Enable
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getWhiteningInitVal</span>
+      <span class="command-handler">getWhiteningInitVal</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Returns the whitening initialization value.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">getCrcInitVal</span>
+      <span class="command-handler">getCrcInitVal</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Returns the CRC initialization value.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setWhiteningInitVal</span>
+        <span class="command-argument">u16</span>
+      <span class="command-handler">setWhiteningInitVal</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the whitening initialization value.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u16</span>Whitening initialization value.
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">setCrcInitVal</span>
+        <span class="command-argument">u32</span>
+      <span class="command-handler">setCrcInitVal</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Set the CRC initialization value.</div>
+      
+      
+      <div class="argument-list">
+      <div class="arguments-title">Arguments</div>
+      <ul>
+        <li>
+        <span class="argument-name">u32</span>CRC initialization value.
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">resetWhiteningInitVal</span>
+      <span class="command-handler">resetWhiteningInitVal</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Reset the whitening initialization value to it's\n                    original setting from the Radio Configurator.</div>
+      
+      
+    </div>
+  </div>
+
+    
+  
+  <div class="command">
+    <div class="command-header-bar"></div>
+    <div class="command-header">
+      <span class="command-name">resetCrcInitVal</span>
+      <span class="command-handler">resetCrcInitVal</span>
+    </div>
+    <div class="command-info">
+      <div class="help">Reset the CRC initialization value to it's\n                    original setting from the Radio Configurator.</div>
+      
+      
+    </div>
+  </div></div>
+
+<script>
+searchbar = document.getElementById('search');
+searchbar.addEventListener('input', function(e) {
+  value = e.target.value.toLowerCase();
+  commands = document.querySelectorAll('.command-name');
+  commands.forEach(function(el) {
+    if (el.textContent.trim().toLowerCase().includes(value)) {
+      el.closest('.command').style.display = 'block';
+    } else {
+      el.closest('.command').style.display = 'none';
+    }
+  });
+});
+</script>
+</body>
+</html>
